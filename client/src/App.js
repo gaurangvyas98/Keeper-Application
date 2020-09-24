@@ -1,125 +1,60 @@
-import React from 'react';
-import axios from 'axios';
-
-
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import './App.css';
-
-class App extends React.Component {
-
-  state = {
-    title: '',
-    body: '',
-    posts: []
-  };
-
-  componentDidMount = () => {
-    this.getBlogPost();
-  };
+import {Switch, Route, BrowserRouter, useHistory} from 'react-router-dom';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import Navbar from './Components/Nav';
+import { initialState, reducer } from './Reducer/UserReducer';
+import CreateArea from './Components/CreateArea';
 
 
-  getBlogPost = () => {
-    axios.get('/api')
-      .then((response) => {
-        const data = response.data;
-        this.setState({ posts: data });
-        console.log('Data has been received!!');
-      })
-      .catch(() => {
-        alert('Error retrieving data!!!');
-      });
-  }
+export const UserContext = createContext();
 
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  };
+//we can't access history in browserrouter component
+//useReducer is similar to useState, we use it with context
+const Routing=()=>{
+  const {state, dispatch} = useContext(UserContext);
+  const history = useHistory();
 
-
-  submit = (event) => {
-    event.preventDefault();
-
-    const payload = {
-      title: this.state.title,
-      body: this.state.body
-    };
-
-
-    axios({
-      url: '/api/save',
-      method: 'POST',
-      data: payload
-    })
-      .then(() => {
-        console.log('Data has been sent to the server');
-        this.resetUserInputs();
-        this.getBlogPost();
-      })
-      .catch(() => {
-        console.log('Internal server error');
-      });;
-  };
-
-  resetUserInputs = () => {
-    this.setState({
-      title: '',
-      body: ''
-    });
-  };
-
-  displayBlogPost = (posts) => {
-
-    if (!posts.length) return null;
-
-
-    return posts.map((post, index) => (
-      <div key={index} className="blog-post__display">
-        <h3>{post.title}</h3>
-        <p>{post.body}</p>
-      </div>
-    ));
-  };
-
-  render() {
-
-    console.log('State: ', this.state);
-
-    //JSX
-    return(
-      <div className="app">
-        <h2>Welcome to the best app ever</h2>
-        <form onSubmit={this.submit}>
-          <div className="form-input">
-            <input 
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <textarea
-              placeholder="body"
-              name="body"
-              cols="30"
-              rows="10"
-              value={this.state.body}
-              onChange={this.handleChange}
-            >
-              
-            </textarea>
-          </div>
-
-          <button>Submit</button>
-        </form>
-
-        <div className="blog-">
-          {this.displayBlogPost(this.state.posts)}
-        </div>
-      </div>
-    );
-  }
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("user"))
+     //if the user is logged in, redirect user to home screen else redirect user to signin screen
+    if(user){
+      dispatch({ type: "USER", payload: user})
+      history.push("/")
+    }
+    else{
+      history.push("/Login")
+    }
+  },[])
+  
+  return(
+    //switch make sure that any one route is active, completely optional
+      <Switch> 
+        <Route exact path="/"> 
+          <CreateArea /> 
+        </Route>
+        <Route path="/Login"> 
+          <Login /> 
+        </Route>
+        <Route exact path="/Signup"> 
+          <Signup /> 
+        </Route>
+      </Switch>
+   );
 }
 
 
+function App(){
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // console.log(state);
+  return (
+    <UserContext.Provider value={{state, dispatch}}>
+      <BrowserRouter>
+        <Navbar />
+        <Routing />
+      </BrowserRouter>
+   </UserContext.Provider>
+  );
+}
 export default App;

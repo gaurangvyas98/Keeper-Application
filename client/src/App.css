@@ -1,41 +1,181 @@
-.app {
-  padding: 10px;
+body {
+    background: #eee;
+    /* padding: 0 16px; */
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  }
+/* ------------------------------------LOGIN AND SIGNUP ------------------------------ */
+.mycard{
+    margin-top: 9%;
+}
+.auth-card{
+    /* width: 40%; */
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid rgb(105,105,105) !important;
+    box-shadow: 0 1px 0 0 rgb(105,105,105)  !important;
+}
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid rgb(105,105,105) !important;
+    box-shadow: 0 1px 0 0 rgb(105,105,105)  !important;
+}
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid rgb(105,105,105) !important;
+    box-shadow: 0 1px 0 0 rgb(105,105,105)  !important;
+}
+
+#toast-container{
+    top: 40px !important;
+    right: 20px !important;
+    left: auto !important;
+}
+
+/* --------------------------------------------SITE LOGO and HEADER AND NAVBAR----------------------------------------- */
+.brand-logo{
+    color: #fff;
+    font-family: "McLaren", cursive;
+    font-weight: 300;
+}
+
+nav{
+    background-color: #f5ba13 !important;
+}
+
+header{
+    background-color: #f5ba13 !important;
+    /* margin: auto -16px; */
+    /* padding: 16px 32px; */
+    box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.3);
+}
+.keeper-icon{
+    font-size: 40px !important;
+    margin-right: 5px !important;
+}
+nav ul a{
+    transition: background-color .3s;
+    font-size: 1.5rem;
+    color: black;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #f5ba13;
+    margin-right: 10px;
+}
+/* ...............................CREATE NOTE AREA.............................. */
+.notes-container{
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+form.create-note {
+    position: relative;
+    max-width: 480px;
+    /* height: 145px; */
+    margin: 30px auto 40px auto;
+    background: #fff;
+    padding: 15px;;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+
+.create-note-text{
+    width: 100% !important;
+    border: none !important;
+    padding: 4px !important;
+    outline: none !important;
+    font-size: 1.4em !important;
+    font-family: inherit !important;
+    resize: none !important;
+    margin: 0 !important;
+    /* color: white !important; */
+}
+.btn-floating{
+    background-color: #f5ba13 !important;
+    font-size: 2rem !important;
+    position: absolute !important;
+    right: 22px;
+    bottom: -30px;
+    background: #f5ba13;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none;
+}
+.btn-floating:hover{
+    background-color: #ddd !important;
+}
+
+/* -----------------------------------NOTE ------------------------------------- */
+.note {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #ccc;
+    padding: 10px;
+    width: 250px;
+    margin: 16px;
+    float: left;
+    max-height: 140px !important;
+}
+.note-h1{
+    font-size: 1.3em !important;
+    margin: 0 0 6px 0;
+    font-weight: 500;
+}
+.note-p{
+    font-size: 1.1em;
+    margin: 0 0 10px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note-button{
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    color: #f5ba13;
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    outline: none;
+}
+.note-button:hover{
+    font-size: 20px;
+    color: red;
 }
 
 
-form {
-  width: 50%;
-}
-
-.form-input {
-  margin: 10px 0px;
-}
-
-.form-input input, .form-input textarea {
-  width: 100%;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  border: 1px solid lightgray;
-  padding: .375rem .75rem;
-  outline: none;
-  
-}
-
-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  cursor: pointer;
-  outline: none;
-}
-
-.blog-post__display {
-  border: 1px solid lightgrey;
-  margin: 5px 0px;
-  border-radius: 4px;
-  padding: 10px;
-}
+  /* form.create-note input,
+  form.create-note textarea {
+    width: 100%;
+    border: none;
+    padding: 4px;
+    outline: none;
+    font-size: 1.2em;
+    font-family: inherit;
+    resize: none;
+  } */
+  /* form.create-note button {
+    position: absolute;
+    right: 18px;
+    bottom: -18px;
+    background: #f5ba13;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none;
+  } */
