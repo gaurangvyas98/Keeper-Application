@@ -1,6 +1,6 @@
 # Google Notes
 
-Keeper Application is google notes clone.
+Keeper Application is notes taking application developed by me using **MERN Stack**. You can sign in to your account and maintain notes. This is just google notes clone.
 
 ## Installation
 
